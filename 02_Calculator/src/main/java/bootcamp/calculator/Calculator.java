@@ -8,21 +8,25 @@ import java.math.RoundingMode;
 public class Calculator {
     public BigDecimal calculate(final Params params) {
 
-        BigDecimal result = new BigDecimal(0);
         BigDecimal x = params.getX();
         BigDecimal y = params.getY();
         String operator = params.getOperator();
+        BigDecimal result = new BigDecimal(0);
 
-        if(operator.equals("+")) {
-            result = x.add(y);
-        } else if (operator.equals("-")) {
-            result = x.subtract(y);
-        } else if (operator.equals("x")) {
-            result = x.multiply(y);
-        } else if (operator.equals("/")) {
-            result = x.divide(y);
-        } else {
-            throw new IllegalArgumentException();
+        switch (operator) {
+            case "+":
+                result = x.add(y);
+                break;
+            case "-":
+                result = x.subtract(y);
+                break;
+            case "x":
+                result = x.multiply(y);
+                break;
+            case "/":
+                result = x.divide(y);
+                break;
+            default: throw new IllegalArgumentException("Invalid Operator");
         }
 
         return result.setScale(1, RoundingMode.FLOOR).stripTrailingZeros();
